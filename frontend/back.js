@@ -1,5 +1,5 @@
 class Api {
-  #Root = "http://localhost:3000/api/";
+  #Root = "/api/";
   #questions = new Questions(this.#Root);
   constructor() {
     console.log("ctor");
