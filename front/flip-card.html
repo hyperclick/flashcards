@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="flip-card.css" />
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <script src="back.js" defer></script>
+    <script src="flashcard.js" defer></script>
+  </head>
+  <body>
+
+    <div class="flip-card-container">
+      <div class="flip-card" onclick="this.classList.toggle('flipped') ">
+        <!-- Лицевая сторона -->
+        <div class="flip-card-side flip-card-front">
+        question
+        </div>
+        <!-- Обратная сторона -->
+        <div class="flip-card-side flip-card-back">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil alias odio quas facilis dolorum laudantium accusamus nulla. Molestiae laudantium non eius natus fugit quas nihil cum exercitationem velit, cumque voluptas?
+        </p>
+        <div class="controls">
+          <button>x</button>
+          <button>v</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

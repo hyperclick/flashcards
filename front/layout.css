@@ -1,0 +1,11 @@
+.flip-card-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+
+  /* width: min(100%, 500px); */
+
+  /* margin-inline: clamp(0px, 5vw);   */
+  margin-inline: max(0px, (20vw - 200px));
+}

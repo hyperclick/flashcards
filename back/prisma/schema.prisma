@@ -1,0 +1,37 @@
+// npx prisma@7 db pull
+// npx prisma@7 generate
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model answers {
+  answer_id   BigInt    @id(map: "answers_pk") @default(autoincrement())
+  text        String    @unique(map: "answers_text_unique") @db.VarChar
+  question_id BigInt
+  questions   questions @relation(fields: [question_id], references: [question_id], onUpdate: Restrict, map: "fk_answers_questions")
+}
+
+model questions {
+  question_id BigInt    @id(map: "questions_pk") @default(autoincrement())
+  text        String    @unique(map: "questions_text_unique") @db.VarChar
+  answers     answers[]
+  results     results[]
+}
+
+model results {
+  question_id             BigInt
+  last_answer_is_correct  Boolean
+  last_answered_at        DateTime  @default(dbgenerated("CURRENT_DATE")) @db.Date
+  result_id               BigInt    @id(map: "results_pk") @default(autoincrement())
+  next_review_at          DateTime  @db.Date
+  interval_days           Int       @default(1)
+  correct_answers_count   Int       @default(0)
+  incorrect_answers_count Int       @default(0)
+  questions               questions @relation(fields: [question_id], references: [question_id], onUpdate: Restrict, map: "results_questions_fk")
+}

@@ -1,0 +1,61 @@
+db
+    supabase
+        https://supabase.com/dashboard/project/fxjrxzkgyqwhsdhrzldh
+
+    schema
+        questions
+            question_id
+            text
+            tags
+        questions_tags
+        answers
+            answer_id
+            question_id
+            group
+            text
+            is_correct
+            excluded_types
+
+
+        users
+        users_questions
+            user_id
+            question_id
+            shown_times
+            answered_times
+            shown_dt
+            answered_dt
+
+
+
+api
+    \questions
+        get \next
+            response:
+                {
+                    questionId,
+                    text,
+                    answer,
+                }
+        put \:questionId\answer
+            payload:
+                {
+                    isCorrect: true/false,
+                }
+        get \count:
+            response:
+                {
+                    count,
+                }
+        get \statistics
+            response:
+                {
+                    total,
+                    answeredCorrectly,
+                }
+        get \:questionId\statistics
+            response:
+                {
+                    askedTotal,
+                    answeredCorrectly,
+                }

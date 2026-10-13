@@ -1,0 +1,20 @@
+
+.btn {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:hover {
+  /* transform: translate(-10px,-10px); */
+  /* box-shadow: 10px; */
+
+  border: 2px solid green;
+}
+
+.mt1rem {
+  margin-top: 1rem;
+}
