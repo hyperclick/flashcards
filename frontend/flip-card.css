@@ -51,6 +51,12 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
 }
 
+.flip-card-side pre, 
+.flip-card-side code {
+  white-space: pre-line; /* Включает автоматический перенос длинных строк */
+  word-break: break-word; /* Дополнительно: помогает корректно переносить слишком длинные слова */
+}
+
 /* Стили лица */
 .flip-card-front {
   position: absolute; 

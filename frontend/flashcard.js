@@ -5,8 +5,8 @@
   const answerTag = backSide.firstElementChild;
 
   const question = await api.questions.next();
-  frontSide.textContent = question.question_text;
-  answerTag.textContent = question.answer_text;
+  frontSide.innerHTML = marked.parse(question.question_text);
+  answerTag.innerHTML = marked.parse(question.answer_text);
   
 
   
