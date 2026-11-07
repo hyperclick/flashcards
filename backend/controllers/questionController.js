@@ -1,18 +1,21 @@
+// backend/controllers/questionController.js
 // Контроллер отвечает только за HTTP-уровень: достать данные из запроса (req), вызвать бизнес-логику и вернуть ответ (res).
 
-const questionService = require('../services/questionService');
+import questionService from '../services/questionService.js'; // Добавили расширение .js
 
-exports.getNextQuestion = async (req, res, next) => {
+export const getNextQuestion = async (req, res, next) => {
   try {
-    const userId = req.params.id;
-    // Вызываем сервис, не нагружая контроллер логикой поиска
-    const user = await questionService.getNextQuestion(userId); 
+    // ВАЖНО: Берем id текущего авторизованного пользователя из req.user
+    const userId = req.user.id; 
     
-    if (!user) {
-      return res.status(404).json({ message: 'Пользователь не найден' });
+    // Вызываем сервис, передавая ему ID пользователя
+    const cardData = await questionService.getNextQuestion(userId); 
+    
+    if (!cardData) {
+      return res.status(200).json({ message: 'Все карточки повторены на сегодня!', card: null });
     }
     
-    res.json(user);
+    res.json(cardData);
   } catch (error) {
     next(error); // Передаем ошибку в глобальный errorHandler
   }

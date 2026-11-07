@@ -1,6 +1,6 @@
 {
-  "name": "tick-tack-toe-frontend",
-  "description": "layero fails withou this",
+  "name": "flashcards-frontend",
+  "description": "layero fails without this",
   "version": "1.0.0",
   "scripts": {
     "build": "echo 'No build needed'"

@@ -1,3 +1,10 @@
+nav>.login{
+  /* move right */
+  display: block;
+  margin-left: auto;
+  width: fit-content;
+}
+
 .flip-card-container {
   display: grid;
   justify-items: center;

@@ -3,11 +3,24 @@
 
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"] // 1. Включаем поддержку кастомных схем
 }
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["flashcards", "public"] // 2. Перечисляем доступные схемы
+}
+
+model users {
+  user_id    BigInt    @id(map: "users_pk") @default(autoincrement()) 
+  google_id  String    @unique
+  first_name String
+  last_name  String
+  avatar     String?
+  results    results[]
+ 
+  @@schema("flashcards") // 3. Явно привязываем модель к схеме flashcards
 }
 
 model answers {
@@ -15,6 +28,8 @@ model answers {
   text        String    @unique(map: "answers_text_unique") @db.VarChar
   question_id BigInt
   questions   questions @relation(fields: [question_id], references: [question_id], onUpdate: Restrict, map: "fk_answers_questions")
+
+  @@schema("flashcards") // 3. Явно привязываем модель к схеме flashcards
 }
 
 model questions {
@@ -22,6 +37,8 @@ model questions {
   text        String    @unique(map: "questions_text_unique") @db.VarChar
   answers     answers[]
   results     results[]
+
+  @@schema("flashcards") // 3. Явно привязываем модель к схеме flashcards
 }
 
 model results {
@@ -34,4 +51,9 @@ model results {
   correct_answers_count   Int       @default(0)
   incorrect_answers_count Int       @default(0)
   questions               questions @relation(fields: [question_id], references: [question_id], onUpdate: Restrict, map: "results_questions_fk")
+  
+  user_id                 BigInt?   
+  user                    users?    @relation(fields: [user_id], references: [user_id]) 
+
+  @@schema("flashcards") // 3. Явно привязываем модель к схеме flashcards
 }

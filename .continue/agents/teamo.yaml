@@ -1,0 +1,17 @@
+# This is an example configuration file
+# To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
+
+name: teamo
+version: 1.0.0
+schema: v1
+
+# Define which models can be used
+# https://docs.continue.dev/customization/models
+models:
+  - name: DeepSeek Flash Free
+    provider: openai
+    model: deepseek-v4-flash-free
+    apiKey: sk-teamo-acc9228df6b2d6aac09112b5cfdec252a3d8c77f7e7c7cb1
+    apiBase: https://api.teamorouter.com/v1
+    
+    

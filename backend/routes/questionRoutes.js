@@ -1,13 +1,11 @@
-const express = require('express');
+// backend/routes/questionRoutes.js
+import express from 'express';
+import {getNextQuestion} from '../controllers/questionController.js'; // Добавили расширение .js
+import { protect } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
-const controller = require('../controllers/questionController');
-// const authMiddleware = require('../middlewares/authMiddleware');
 
-// Здесь мы только объявляем эндпоинты и привязываем к ним нужные контроллеры и middleware.
+// Маршрут защищен: сначала проверяется токен, затем вызывается контроллер
+router.get('/next', protect, getNextQuestion);
 
-// Проверяем авторизацию через middleware, затем вызываем контроллер
-// router.get('/next', authMiddleware, controller.getNextQuestion);
-router.get('/next', controller.getNextQuestion);
-// router.get('/:id', authMiddleware, controller.getNextQuestion);
-
-module.exports = router;
+export default router;

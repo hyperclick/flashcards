@@ -1,9 +1,10 @@
 // config/db.js
-const { PrismaClient } = require('@prisma/client');
-const { PrismaPg } = require('@prisma/adapter-pg');
-const { Pool } = require('pg');
-const prismaConfig = require('../prisma.config.js');
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pkg from 'pg';
+import prismaConfig from '../prisma.config.js';
 
+const { Pool } = pkg;
 const connectionString = prismaConfig.datasource.url;
 
 // Создаем пул драйвера pg напрямую
@@ -16,5 +17,5 @@ const pool = new Pool({
 
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
+export default prisma;
 
-module.exports = prisma;

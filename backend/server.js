@@ -1,12 +1,19 @@
-const express = require('express');
-const errorHandler = require('./middlewares/errorHandler');
+ 
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-const cors = require('cors');
-const questionRoutes = require('./routes/questionRoutes');
+import errorHandler from './middlewares/errorHandler.js';
 
+import passport from './config/passport.js'; // Подключаем нашу настройку Passport
+import authRoutes from './routes/authRoutes.js'; // Подключаем роуты авторизации
+
+import questionRoutes from './routes/questionRoutes.js';
+
+// Инициализация dotenv (если она не делается автоматически через CLI-флаг)
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
 
 
 // Переопределяем стандартный метод JSON-сериализации для всего приложения Express
@@ -27,6 +34,9 @@ app.use(cors(corsOptions));
 
 // Или разрешить любой localhost с любым портом
 // app.use(cors());
+
+app.use(passport.initialize()); // Инициализируем Passport в Express
+app.use('/api/auth', authRoutes); 
 
 // 1. Главная страница (GET-запрос)
 app.get('/', (req, res) => {
@@ -83,6 +93,7 @@ app.get('/api/broken', (req, res, next) => {
 app.use(errorHandler);
 
 
+const PORT = process.env.PORT || 3000;
 // Старт сервера на указанном порту
 app.listen(PORT, () => {
   console.log(`Сервер запущен и доступен по адресу: http://localhost:${PORT}`);
